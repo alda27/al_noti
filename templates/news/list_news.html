@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+<!-- Title -->
+{% block title %}Noticias de Politica{% endblock %}
+{% load static %}
+
+{% block content %}
+    <!-- ##### Featured Post Area Start ##### -->
+    <div class="featured-post-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-12">
+                    <div class="row">
+                        {% for list_news in list_news %}
+                            <div class="col-12 col-lg-4">
+                            <!-- Single Featured Post -->
+                            <div class="single-blog-post featured-post-2">
+                                    <div class="post-thumb">
+                                        <a href="#"><img src="{{ list_news.photo.url }}" alt=""></a>
+                                    </div>
+                                    <div class="post-data">
+                                        <a href="{% url 'news:news_list' list_news.category %}" class="post-catagory">{{ list_news.category }}</a>
+                                        <div class="post-meta">
+                                            <a href="{{ list_news.get_absolute_url }}" class="post-title">
+                                                <h6>{{ list_news.title }}</h6>
+                                            </a>
+                                            <p class="post-excerp">{{ list_news.preview_content }} </p>
+                                            <span>{{ list_news.publish }}</span>
+                                                <div class="d-flex align-items-center">
+                                                        <span>Tags: </span>
+                                                        {% for tags in list_news.tags.all %}
+                                                             <a href="#">{{ tags.name }}</a>{% if not forloop.last %}, {% endif %}
+                                                        {% endfor %}
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- ##### Featured Post Area End ##### -->
+
+{% endblock %}
