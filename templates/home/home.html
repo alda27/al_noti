@@ -15,29 +15,34 @@
                             <div class="row">
                                 {% for latest_news in latest_news %}
                                     <div class="col-12 col-lg-4">
-                                    <!-- Single Featured Post -->
-                                    <div class="single-blog-post featured-post-2">
-                                        <div class="post-thumb">
-                                            <img src="{{ latest_news.photo.url }}" alt="">
-                                        </div>
-                                        <div class="post-data">
-                                            <a href="{% url 'news:news_list' latest_news.category %}" class="post-catagory">{{ latest_news.category }}</a>
-                                            <div class="post-meta">
-                                                <a href="{{ latest_news.get_absolute_url }}" class="post-title">
-                                                    <h6>{{ latest_news.title }}</h6>
-                                                </a>
+                                        <!-- Single Featured Post -->
+                                        <div class="single-blog-post featured-post-2">
+                                            <div class="post-thumb">
+                                                <img src="{{ latest_news.photo.url }}" alt="">
+                                            </div>
+                                            <div class="post-data">
+                                                <a href="{% url 'news:news_list' latest_news.category %}"
+                                                   class="post-catagory">{{ latest_news.category }}</a>
+                                                <div class="post-meta">
+                                                    <a href="{{ latest_news.get_absolute_url }}" class="post-title">
+                                                        <h6>{{ latest_news.title }}</h6>
+                                                    </a>
                                                     <p class="post-excerp">{{ latest_news.preview_content }} </p>
-                                                    <p class="post-date"><span>{{ latest_news.publish|date:"SHORT_DATE_FORMAT" }} | <span>{{ latest_news.publish|time:"g:i A" }}</span></span></p>
+                                                    <p class="post-date">
+                                                        <span>{{ latest_news.publish|date:"SHORT_DATE_FORMAT" }} | <span>{{ latest_news.publish|time:"g:i A" }}</span></span>
+                                                    </p>
                                                     <div class="d-flex align-items-center">
                                                         <span>Tags: </span>
                                                         {% for tags in latest_news.tags.all %}
-                                                             <a href="#">{{ tags.name }}</a>{% if not forloop.last %},{% endif %}
+                                                            <a href="#">{{ tags.name }}</a>{% if not forloop.last %},
+                                                        {% endif %}
                                                         {% endfor %}
                                                     </div>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 {% endfor %}
                             </div>
                         </div>
@@ -60,29 +65,30 @@
                         <!-- Single Post -->
                         {% for popular_news in popular_news %}
                             <div class="col-12 col-md-4">
-                            <div class="single-blog-post style-3">
-                                <div class="post-thumb">
-                                    <img src="{{ popular_news.photo.url }}" alt="">
-                                </div>
-                                <div class="post-data">
-                                    <a href="{% url 'news:news_list' popular_news.category %}" class="post-catagory">{{ popular_news.category }}</a>
-                                    <a href="{{ popular_news.get_absolute_url }}" class="post-title">
-                                        <h6>{{ popular_news.title }}</h6>
-                                    </a>
-                                    <p class="post-excerp">{{ popular_news.preview_content }}</p>
-                                    <p>{{ popular_news.publish }}</p>
-                                    <div class="d-flex align-items-center">
-                                        <span>Tags: </span>
-                                        {% for tags in popular_news.tags.all %}
-                                             <a href="#">{{ tags.name }}</a>{% if not forloop.last %}, {% endif %}
-                                        {% endfor %}
+                                <div class="single-blog-post style-3">
+                                    <div class="post-thumb">
+                                        <img src="{{ popular_news.photo.url }}" alt="">
+                                    </div>
+                                    <div class="post-data">
+                                        <a href="{% url 'news:news_list' popular_news.category %}"
+                                           class="post-catagory">{{ popular_news.category }}</a>
+                                        <a href="{{ popular_news.get_absolute_url }}" class="post-title">
+                                            <h6>{{ popular_news.title }}</h6>
+                                        </a>
+                                        <p class="post-excerp">{{ popular_news.preview_content }}</p>
+                                        <p>{{ popular_news.publish }}</p>
+                                        <div class="d-flex align-items-center">
+                                            <span>Tags: </span>
+                                            {% for tags in popular_news.tags.all %}
+                                                <a href="#">{{ tags.name }}</a>{% if not forloop.last %}, {% endif %}
+                                            {% endfor %}
+
+                                        </div>
 
                                     </div>
-
                                 </div>
                             </div>
-                        </div>
-                         {% empty %}
+                        {% empty %}
                             <h3>No popular News</h3>
                         {% endfor %}
 
@@ -104,7 +110,8 @@
                         <img src="{% static 'img/bg-img/video1.jpg' %}" alt="">
                         <!-- Video Button -->
                         <div class="videobtn">
-                            <a href="https://www.youtube.com/watch?v=5BQr-j3BBzU" class="videoPlayer"><i class="fa fa-play" aria-hidden="true"></i></a>
+                            <a href="https://www.youtube.com/watch?v=5BQr-j3BBzU" class="videoPlayer"><i
+                                    class="fa fa-play" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -115,7 +122,8 @@
                         <img src="{% static 'img/bg-img/video2.jpg' %}" alt="">
                         <!-- Video Button -->
                         <div class="videobtn">
-                            <a href="https://www.youtube.com/watch?v=5BQr-j3BBzU" class="videoPlayer"><i class="fa fa-play" aria-hidden="true"></i></a>
+                            <a href="https://www.youtube.com/watch?v=5BQr-j3BBzU" class="videoPlayer"><i
+                                    class="fa fa-play" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -126,7 +134,8 @@
                         <img src="{% static 'img/bg-img/video3.jpg' %}" alt="">
                         <!-- Video Button -->
                         <div class="videobtn">
-                            <a href="https://www.youtube.com/watch?v=5BQr-j3BBzU" class="videoPlayer"><i class="fa fa-play" aria-hidden="true"></i></a>
+                            <a href="https://www.youtube.com/watch?v=5BQr-j3BBzU" class="videoPlayer"><i
+                                    class="fa fa-play" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -140,197 +149,36 @@
         <div class="container">
             <div class="row">
                 <!-- Editors Pick -->
-                <div class="col-12 col-md-7 col-lg-9">
+                <div class="col-12 col-md-7 col-lg-12">
                     <div class="section-heading">
                         <h6>Últimos Articulos</h6>
                     </div>
                     <div class="row">
-
                         <!-- Single Post -->
-                        <div class="col-12 col-lg-4">
-                            <div class="single-blog-post">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="{% static 'img/bg-img/1.jpg' %}" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-title">
-                                        <h6>Orci varius natoque penatibus et magnis dis parturient montes.</h6>
-                                    </a>
-                                    <div class="post-meta">
-                                        <div class="post-date"><a href="#">February 11, 2018</a></div>
+                        {% for latest_articles in latest_articles %}
+                            <div class="col-12 col-lg-3">
+                                <div class="single-blog-post">
+                                    <div class="post-thumb">
+                                        <a href="#"><img src="
+                                                {% if latest_articles.photo %}{{ latest_articles.photo.url }}{% endif %}"
+                                                         alt=""></a>
+                                    </div>
+                                    <div class="post-data">
+                                        <a href="{{ latest_articles.get_absolute_url }}" class="post-title">
+                                            <h6>{{ latest_articles.title }}</h6>
+                                        </a>
+                                        <div class="post-meta">
+                                            <div class="post-date"><a
+                                                    href="#">{{ latest_articles.publish|date:"SHORT_DATE_FORMAT" }}
+                                                | {{ latest_articles.publish|time:"g:i A" }}</a></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endfor %}
 
-                        <!-- Single Post -->
-                        <div class="col-12 col-lg-4">
-                            <div class="single-blog-post">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="{% static 'img/bg-img/2.jpg' %}" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-title">
-                                        <h6>Orci varius natoque penatibus et magnis dis parturient montes.</h6>
-                                    </a>
-                                    <div class="post-meta">
-                                        <div class="post-date"><a href="#">February 11, 2018</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Single Post -->
-                        <div class="col-12 col-lg-4">
-                            <div class="single-blog-post">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="{% static 'img/bg-img/3.jpg' %}" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-title">
-                                        <h6>Orci varius natoque penatibus et magnis dis parturient montes.</h6>
-                                    </a>
-                                    <div class="post-meta">
-                                        <div class="post-date"><a href="#">February 11, 2018</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Post -->
-                        <div class="col-12 col-lg-4">
-                            <div class="single-blog-post">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="{% static 'img/bg-img/4.jpg' %}" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-title">
-                                        <h6>Orci varius natoque penatibus et magnis dis parturient montes.</h6>
-                                    </a>
-                                    <div class="post-meta">
-                                        <div class="post-date"><a href="#">February 11, 2018</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Post -->
-                        <div class="col-12 col-lg-4">
-                            <div class="single-blog-post">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="{% static 'img/bg-img/5.jpg' %}" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-title">
-                                        <h6>Orci varius natoque penatibus et magnis dis parturient montes.</h6>
-                                    </a>
-                                    <div class="post-meta">
-                                        <div class="post-date"><a href="#">February 11, 2018</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Post -->
-                        <div class="col-12 col-lg-4">
-                            <div class="single-blog-post">
-                                <div class="post-thumb">
-                                    <a href="#"><img src="{% static 'img/bg-img/6.jpg' %}" alt=""></a>
-                                </div>
-                                <div class="post-data">
-                                    <a href="#" class="post-title">
-                                        <h6>Orci varius natoque penatibus et magnis dis parturient montes.</h6>
-                                    </a>
-                                    <div class="post-meta">
-                                        <div class="post-date"><a href="#">February 11, 2018</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </div>
-
-                <!-- World News -->
-                <div class="col-12 col-md-5 col-lg-3">
-                    <div class="section-heading">
-                        <h6>Noticias Mundiales</h6>
-                    </div>
-
-                    <!-- Single Post -->
-                    <div class="single-blog-post style-2">
-                        <div class="post-thumb">
-                            <a href="#"><img src="{% static 'img/bg-img/7.jpg' %}" alt=""></a>
-                        </div>
-                        <div class="post-data">
-                            <a href="#" class="post-title">
-                                <h6>Orci varius natoque penatibus et magnis</h6>
-                            </a>
-                            <div class="post-meta">
-                                <div class="post-date"><a href="#">February 11, 2018</a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Post -->
-                    <div class="single-blog-post style-2">
-                        <div class="post-thumb">
-                            <a href="#"><img src="{% static 'img/bg-img/8.jpg' %}" alt=""></a>
-                        </div>
-                        <div class="post-data">
-                            <a href="#" class="post-title">
-                                <h6>Orci varius natoque penatibus et magnis</h6>
-                            </a>
-                            <div class="post-meta">
-                                <div class="post-date"><a href="#">February 11, 2018</a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Post -->
-                    <div class="single-blog-post style-2">
-                        <div class="post-thumb">
-                            <a href="#"><img src="{% static 'img/bg-img/9.jpg' %}" alt=""></a>
-                        </div>
-                        <div class="post-data">
-                            <a href="#" class="post-title">
-                                <h6>Orci varius natoque penatibus et magnis</h6>
-                            </a>
-                            <div class="post-meta">
-                                <div class="post-date"><a href="#">February 11, 2018</a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Post -->
-                    <div class="single-blog-post style-2">
-                        <div class="post-thumb">
-                            <a href="#"><img src="{% static 'img/bg-img/10.jpg' %}" alt=""></a>
-                        </div>
-                        <div class="post-data">
-                            <a href="#" class="post-title">
-                                <h6>Orci varius natoque penatibus et magnis</h6>
-                            </a>
-                            <div class="post-meta">
-                                <div class="post-date"><a href="#">February 11, 2018</a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Post -->
-                    <div class="single-blog-post style-2">
-                        <div class="post-thumb">
-                            <a href="#"><img src="{% static 'img/bg-img/11.jpg' %}" alt=""></a>
-                        </div>
-                        <div class="post-data">
-                            <a href="#" class="post-title">
-                                <h6>Orci varius natoque penatibus et magnis</h6>
-                            </a>
-                            <div class="post-meta">
-                                <div class="post-date"><a href="#">February 11, 2018</a></div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>

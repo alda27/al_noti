@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+<!-- Title -->
+{% block title %}Articulos de nuestros editores{% endblock %}
+{% load static %}
+{% load blog_comments %}
+
+{% block content %}
+    <!-- ##### Featured Post Area Start ##### -->
+    <div class="editors-pick-post-area section-padding-80-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-12">
+                    <div class="row">
+                        {% for article in articles %}
+                            <div class="col-12 col-lg-3">
+                                <div class="single-blog-post">
+                                    <div class="post-thumb">
+                                        <a href="{{ article.get_absolute_url }}"><img
+                                                src="{% if article.photo %}{{ article.photo.url }}{% endif %}"
+                                                alt=""></a>
+                                    </div>
+                                    <div class="post-data">
+                                        <a href="{{ article.get_absolute_url }}" class="post-title">
+                                            <h6>{{ article.title }}</h6>
+                                        </a>
+                                        <div class="post-meta">
+                                            <div class="post-date"><a
+                                                    href="#">{{ article.publish|date:"SHORT_DATE_FORMAT" }}
+                                                | {{ article.publish|time:"g:i A" }}</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- ##### Featured Post Area End ##### -->
+
+{% endblock %}

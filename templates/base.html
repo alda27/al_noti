@@ -33,6 +33,17 @@
                                 <a href="{% url 'home:home' %}"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
                             </div>
                             <div class="login-search-area d-flex align-items-center">
+                                {% if user.is_authenticated %}
+                                    <div class="login d-flex">
+                                        <span>Bienvenido: </span><a href="#">{{ user.username }}</a>
+                                        <a href="{% url 'account:logout' %}">Cerrar Sesion</a>
+                                    </div>
+                                {% else %}
+                                    <div class="login d-flex">
+                                        <a href="{% url 'account:login' %}">Iniciar Sesion</a>
+                                        <a href="{% url 'account:register' %}">Registrarse</a>
+                                    </div>
+                                {% endif %}
                                 <!-- Search Form -->
                                 <div class="search-form">
                                     <form action="#" method="post">
@@ -79,6 +90,7 @@
                                     {% for category in categories_link %}
                                         <li><a  href="{% url 'news:news_list' category.name %}">{{ category.name }}</a></li>
                                     {% endfor %}
+                                    <li><a href="{% url 'articles:articles_list' %}">Articulos</a></li>
                                 </ul>
                             </div>
                             <!-- Nav End -->

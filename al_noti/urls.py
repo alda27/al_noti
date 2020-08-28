@@ -22,4 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('noticia/', include('news.urls', namespace='news')),
+    path('account/', include('account.urls', namespace='account')),
+    path('articulos/', include('blog.urls', namespace='articles')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

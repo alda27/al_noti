@@ -24,7 +24,7 @@
                                                 <h6>{{ list_news.title }}</h6>
                                             </a>
                                             <p class="post-excerp">{{ list_news.preview_content }} </p>
-                                            <span>{{ list_news.publish }}</span>
+                                            <span>{{ list_news.publish|date:"SHORT_DATE_FORMAT" }} | <span>{{ list_news.publish|time:"g:i A" }}</span></span>
                                                 <div class="d-flex align-items-center">
                                                         <span>Tags: </span>
                                                         {% for tags in list_news.tags.all %}
