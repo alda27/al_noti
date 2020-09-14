@@ -49,7 +49,8 @@ class News(models.Model):
     slug = models.SlugField(max_length=300, unique_for_date='publish')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_news', verbose_name='Autor de la Noticia')
     tags = models.ManyToManyField(Tag, related_name='tag_news', verbose_name='Tags de la noticia')
-    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, verbose_name='Categoria de la Noticia')
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, verbose_name='Categoria de la Noticia') #
+    # TODO: add related name
     photo = models.ImageField(upload_to='news/%Y/%m/%d/')
     is_popular = models.BooleanField(default=False)
     publish = models.DateTimeField(default=timezone.now, verbose_name='Fecha de Publicación')

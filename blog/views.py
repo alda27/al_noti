@@ -18,6 +18,7 @@ def article_detail(request, year, month, day, slug):
     news_tags_id = article_details.tags.values_list('id', flat=True)
     similar_article = Article.objects.filter(tags__in=news_tags_id).exclude(id=article_details.id)
     similar_article = similar_article.annotate(same_tags=Count('tags')).order_by('-same_tags', '-publish')[:3]
+    # TODO: hacer el listado de los posts destacados
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
