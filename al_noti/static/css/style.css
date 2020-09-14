@@ -1,5 +1,5 @@
 
-/* import fonts from fonts.css file */ 
+/* import fonts from fonts.css file */
 @import url(./fonts.css);
 
 
@@ -136,6 +136,10 @@ a:hover{
 }
 .text-heading{
     color: #f2f2f2;
+}
+.text-heading:hover {
+    text-decoration: underline;
+    color: #ffffff;
 }
 .time-news{
     color: #f2f2f2;
