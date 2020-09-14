@@ -19,7 +19,7 @@
                                 {% endfor %}
                             </ul>
                         </div>
-                        <h5 class="h5 text-heading">{{ last_news.title }}</h5>
+                        <h5 class="h5"><a class="text-heading" href="{{ last_news.get_absolute_url }}">{{ last_news.title }}</a></h5>
                         <span class="time-news">{{ last_news.publish|date:"SHORT_DATE_FORMAT" }} | {{ last_news.publish|time:"g:i A" }}</span>
                     </div>
                 </div>
