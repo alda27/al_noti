@@ -25,7 +25,7 @@
                         {% with user_saves_news=news_detail.user_save.all %}
                             <a class="btn btn-success " id="save-btn" href="#" data-id="{{ news_detail.id }}"
                                data-action="{% if request.user in user_saves_news %}un{% endif %}save">
-                                {% if request.user in user_saves_news %}No{% endif %} Guardar Noticia</a>
+                                {% if request.user in user_saves_news %}Eliminar{% else %}Guardar{% endif %}</a>
                         {% endwith %}
                     </div>
                 </div>
