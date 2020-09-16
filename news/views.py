@@ -1,14 +1,19 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponse
 from django.db.models import Count
+import json
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 from .models import News
 
 
-def news_list(request, category):
-    list_news = News.published.all().filter(category__name__iexact=category).order_by('-publish')
+def news_list(request, category, id):
+    list_news = News.published.all().filter(category__name__iexact=category, category__id=id).order_by('-publish')
     context = {
         'list_news': list_news
     }
     return render(request, 'news/list_news.html', context)
+
 
 # podemos crear una vista como la de arriba pero que envie el context al template base para usarlo en la barra
 # de navegacion edit: no pude :(, tuve que crear un context processor para hacerla global y obtener las categorias
@@ -26,3 +31,23 @@ def news_detail(request, category, year, month, day, slug):
                'popular_news': popular_news,
                'similar_news': similar_news}
     return render(request, 'news/news_detail.html', context)
+
+
+@login_required
+@require_POST
+def news_save(request):
+    news_id = request.POST.get('id')
+    action = request.POST.get('action')
+    if news_id and action:
+        try:
+            news = News.objects.get(id=news_id)
+            if action == 'save':
+                news.user_save.add(request.user)
+            else:
+                news.user_save.remove(request.user)
+            return JsonResponse({'status': 'ok'})
+        except:
+            pass
+    return JsonResponse({'status': 'ko'})
+
+
