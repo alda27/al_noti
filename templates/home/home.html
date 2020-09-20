@@ -9,7 +9,7 @@
         <div class="main__section">
             {% for last_news in latest_two_news %}
                 <div class="last__news__container">
-                    <img class="img-fluid rounded" src="{{ last_news.photo.url }}" alt="">
+                    <img class="img-cover-last-news rounded" src="{{ last_news.photo.url }}" alt="">
                     <div class="news-description">
                         <div class="container_tags">
                             <i class="fas fa-tags tags-icon"></i>
@@ -43,8 +43,10 @@
             <div class="row mt-4">
                 {% for popular_news in popular_news %}
                     <div class="col-lg-4 mb-2 pl-1 pr-1">
-                        <img src="{% if popular_news.photo %}{{ popular_news.photo.url }}{% endif %} "
-                             alt="image news popular" class="img-fluid rounded mb-2">
+                        <div class="container-img-list-news mb-2">
+                            <img src="{% if popular_news.photo %}{{ popular_news.photo.url }}{% endif %} "
+                             alt="image news popular" class="img-cover-list-news rounded mb-2">
+                        </div>
                         <h6 class="h5 mb-1"><a class="link__news"
                                                href="{{ popular_news.get_absolute_url }}">{{ popular_news.title }}</a>
                         </h6>
@@ -61,8 +63,10 @@
             <div class="row mt-4">
                 {% for sport_news in sport_news %}
                     <div class="col-lg-4 mb-2 pl-1 pr-1">
-                        <img src="{% if sport_news.photo %}{{ sport_news.photo.url }}{% endif %} "
-                             alt="image news popular" class="img-fluid rounded mb-2">
+                        <div class="container-img-list-news mb-2">
+                            <img src="{% if sport_news.photo %}{{ sport_news.photo.url }}{% endif %} "
+                                 alt="image news popular" class="img-cover-list-news rounded mb-2">
+                        </div>
                         <h6 class="h5 mb-1"><a class="link__news"
                                                href="{{ sport_news.get_absolute_url }}">{{ sport_news.title }}</a></h6>
                         <p class="news_preview_description">{{ sport_news.preview_content }}</p>

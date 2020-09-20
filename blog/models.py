@@ -17,6 +17,11 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Etiqueta'
+        verbose_name_plural = 'Etiquetas'
+        ordering = ('-created',)
+
 
 class Article(models.Model):
     STATUS_CHOICES = (('borrador', 'Borrador'),
@@ -37,6 +42,8 @@ class Article(models.Model):
     published = PublishedManager()  # Our custom manager
 
     class Meta:
+        verbose_name = 'Articulo'
+        verbose_name_plural = 'Articulos'
         ordering = ('-publish',)
 
     def __str__(self):
@@ -61,6 +68,8 @@ class Comment(models.Model):
                               verbose_name='Estado del comentario')
 
     class Meta:
+        verbose_name = 'Comentario'
+        verbose_name_plural = 'Comentarios'
         ordering = ('-created',)
 
     def __str__(self):

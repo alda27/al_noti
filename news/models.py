@@ -47,7 +47,7 @@ class News(models.Model):
                     ('publicado', 'Publicado')
                     )
     title = models.CharField(max_length=300, verbose_name='Titulo de la Noticia')
-    preview_content = models.CharField(max_length=300, verbose_name='Contenido Previo de la Noticia')
+    preview_content = models.CharField(max_length=100, verbose_name='Contenido Previo de la Noticia')
     body = models.TextField(verbose_name='Contenido de la Noticia')
     slug = models.SlugField(max_length=300, unique_for_date='publish')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_news', verbose_name='Autor de la Noticia')

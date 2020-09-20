@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse
+from django.shortcuts import render, get_object_or_404
 from django.db.models import Count
-import json
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
@@ -9,8 +9,11 @@ from .models import News
 
 def news_list(request, category, id):
     list_news = News.published.all().filter(category__name__iexact=category, category__id=id).order_by('-publish')
+    paginator = Paginator(list_news, 2)
+    page_number = request.GET.get('page')
+    page_list_news = paginator.get_page(page_number)
     context = {
-        'list_news': list_news
+        'list_news': page_list_news
     }
     return render(request, 'news/list_news.html', context)
 
@@ -49,5 +52,3 @@ def news_save(request):
         except:
             pass
     return JsonResponse({'status': 'ko'})
-
-

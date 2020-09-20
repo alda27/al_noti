@@ -21,4 +21,5 @@ class NewsAdmin(admin.ModelAdmin):
     search_fields = ('title', 'body')
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'publish'
-    ordering = ('status', 'publish')
+    ordering = ('-publish', 'status')
+    readonly_fields = ('user_save',)
