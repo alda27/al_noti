@@ -33,9 +33,11 @@
                 <div class="col-lg-2">
                     <div class="auth-container">
                         {% if request.user.is_authenticated %}
-                            <a href="{% url 'account:logout' %}"><i class="fas fa-user"></i>Cerrar Sesión</a>
+                            <a href="{% url 'account:dashboard' %}" class="btn btn-outline-success text-success">Noticias Guardadas</a>
+                            <a href="{% url 'account:edit_profile' %}" class="btn btn-outline-success text-success">Editar Perfil</a>
+                            <a href="{% url 'account:logout' %}" class="btn btn-outline-danger text-danger"><i class="fas fa-user"></i>Cerrar Sesión</a>
                         {% else %}
-                            <a href="{% url 'account:login' %}"><i class="fas fa-user"></i>login / Registrarse</a>
+                            <a href="{% url 'account:login' %}" class="btn btn-outline-primary text-primary"><i class="fas fa-user"></i>login / Registrarse</a>
                         {% endif %}
                     </div>
                 </div>

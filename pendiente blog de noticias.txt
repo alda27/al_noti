@@ -1,0 +1,24 @@
+
+
+
+---------------------TODO al_noti--------------------------
+
+0...... corregir enlace de las dos noticias en el home (done)
+1. crear formularios de login y registro (done)
+2. agregar template detail blogs para los articulos (done)
+3. agregar section comentarios para los articulos (done)
+4. agregar formulario para comentar (done)
+5. agregar template de contacto
+6. agregar links en el footer
+7. agregar formulario de newsletter
+8. mejorar diseño de iconos redes sociales
+9. agregar input de busqueda
+10. Mejorar header para el dashboard del usuario
+11. agregar menu sticky (que se quede fijo ) cuando haga scroll en el sitio
+12. agregar modelos de videos
+
+
+-------MEJORAR------------
+1. mejorar section de comentarios (diseño)
+	1.1 implementar creación de comentario con ajax (doing)
+2. agregar campos imagenes en los modelos y establecer un tamaño para cada una
