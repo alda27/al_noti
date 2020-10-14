@@ -22,3 +22,4 @@
 1. mejorar section de comentarios (diseño)
 	1.1 implementar creación de comentario con ajax (doing)
 2. agregar campos imagenes en los modelos y establecer un tamaño para cada una
+

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h2>Editar la noticia</h2>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+                <form action="." method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                {{ field.errors }}
+                                {{ field.label_tag }}
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                    <input type="submit" value="Guardar" class="btn btn-success btn-block">
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

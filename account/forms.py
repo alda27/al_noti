@@ -19,5 +19,5 @@ class ProfileEditForm(forms.ModelForm):
         model = Profile
         fields = ('photo',)
         labels = {
-            'photo': ('Foto de Perfil')
+            'photo': ('Foto de Perfil',)
         }

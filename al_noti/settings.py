@@ -42,10 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     'ckeditor',
+    # 'debug_toolbar', (debug tool bar app) doesnt work
+    'crispy_forms',
 
 ]
 
 MIDDLEWARE = [
+    #  'debug_toolbar.middleware.DebugToolbarMiddleware', (debug tool bar app) doesnt work
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'al_noti.urls'
@@ -120,11 +124,10 @@ USE_L10N = True
 
 USE_TZ = False
 
-
 # Authentication Backend
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'account.authentication.EmailAuthBackend',
+    'account.authentication.EmailAuthBackend',  # logs in user with email
 ]
 
 # Static files (CSS, JavaScript, Images)
@@ -140,3 +143,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 LOGIN_URL = 'account:login'
+
+
+# crispy form app
+# CRISPY_TEMPLATE_PACK = 'boostrap4'

@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
+from django.contrib.auth.backends import BaseBackend
 
 
-class EmailAuthBackend(object):
+class EmailAuthBackend(BaseBackend):
     """Authenticate using email"""
 
     def authenticate(self, request, username=None, password=None):

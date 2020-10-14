@@ -16,6 +16,10 @@
                     <p class="news_preview_description">{{ list_news.preview_content }}</p>
                     <span class="news__date_time ">{{ list_news.publish|date:"SHORT_DATE_FORMAT" }} | {{ list_news.publish|time:"g:i A" }}</span>
                 </div>
+                {% empty %}
+                <div class="col-lg-12">
+                    <h3 class="text-center">No hay Noticias con esta categoria</h3>
+                </div>
             {% endfor %}
 
         </div>

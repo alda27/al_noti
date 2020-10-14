@@ -10,7 +10,7 @@ from .forms import CommentForm
 
 def articles_list(request):
     articles = Article.published.all()
-    paginator = Paginator(articles, 2)
+    paginator = Paginator(articles, 3)
     page_number = request.GET.get('page')
     page_list_article = paginator.get_page(page_number)
     context = {'articles': page_list_article}

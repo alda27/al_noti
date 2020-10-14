@@ -9,7 +9,7 @@ from .models import News
 
 def news_list(request, category, id):
     list_news = News.published.all().filter(category__name__iexact=category, category__id=id).order_by('-publish')
-    paginator = Paginator(list_news, 2)
+    paginator = Paginator(list_news, 3)
     page_number = request.GET.get('page')
     page_list_news = paginator.get_page(page_number)
     context = {

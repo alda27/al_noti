@@ -3,6 +3,8 @@
 {% block content %}
     <div class="container">
         <h2 class="h2 text-center mt-5">Registrarse</h2>
+        <!--ALERTS-->
+        {% include 'partials/_alerts.html' %}
         <div class="row d-flex justify-content-center">
             <div class="col-lg-4 mt-3">
                 <form method="post">
@@ -31,6 +33,9 @@
                     <div class="form-group">
                         <label for="exampleInputPassword1">Confirmar Contraseña</label>
                         <input name="password2" type="password" class="form-control" id="exampleInputPassword1" required>
+                      </div>
+                    <div class="form-group">
+                        <input name="next" type="hidden" class="form-control" value="{{ request.GET.next }}">
                       </div>
                     <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
                   </form>

@@ -3,6 +3,8 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+from ckeditor.fields import RichTextField
+
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -30,7 +32,7 @@ class Article(models.Model):
     slug = models.SlugField(max_length=250, unique_for_date='publish', verbose_name='slug del articulo')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_articles',
                                verbose_name='Autor del articulo')
-    body = models.TextField(verbose_name='Contenido del articulo')
+    body = RichTextField(verbose_name='Contenido del articulo')
     photo = models.ImageField(upload_to='article/%Y/%m/%d/', blank=True)
     tags = models.ManyToManyField(Tag, related_name='tags_articles', verbose_name='Etiquetas del articulo')
     publish = models.DateTimeField(default=timezone.now, verbose_name='Fecha de publicacion')

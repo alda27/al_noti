@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.contrib.auth.models import User
 from news.models import News
 from .forms import UserEditForm, ProfileEditForm
@@ -26,6 +27,7 @@ def edit(request):
             if 'photo' in request.FILES:
                 profile_edit_form.photo = request.FILES['photo']
             profile_edit_form.save()
+            messages.success(request, 'Tu perfil ha sido actualizado con éxito')
             return redirect('account:dashboard')
     else:
         user_edit_form = UserEditForm(instance=request.user)
@@ -45,10 +47,13 @@ def register_user(request):
         email = request.POST['email']
         password = request.POST['password']
         password2 = request.POST['password2']
+        next_parameter = request.POST['next']
         if password == password2:
             if User.objects.filter(username=username).exists():
+                messages.error(request, 'El usuario ya existe')
                 redirect('account:register')
             elif User.objects.filter(email=email).exists():
+                messages.error(request, 'El email ya existe')
                 redirect('account:register')
             else:
                 user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username,
@@ -58,7 +63,9 @@ def register_user(request):
                 password = request.POST['password']
                 user = authenticate(username=username, password=password)
                 login(request, user)
-                return redirect('account:dashboard')
+                if next_parameter:
+                    return redirect(next_parameter)
+                messages.success(request, 'Registro exitoso')
     return render(request, 'account/register.html')
 
 
@@ -66,10 +73,16 @@ def login_user(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+        next_parameter = request.POST['next']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            if next_parameter:
+                return redirect(next_parameter)
             return redirect('home:home')
+        else:
+            messages.error(request, 'Las credenciales no son correctas. intentalo de nuevo')
+            return redirect('account:login')
     return render(request, 'account/login.html')
 
 
