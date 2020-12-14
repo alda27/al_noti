@@ -16,7 +16,8 @@
 10. Mejorar header para el dashboard del usuario
 11. agregar menu sticky (que se quede fijo ) cuando haga scroll en el sitio
 12. agregar modelos de videos
-
+13. crear signal para crear perfil del usuario cuando se registre
+14. agregar permisos y grupos para los editores y los usuario normales
 
 -------MEJORAR------------
 1. mejorar section de comentarios (diseño)

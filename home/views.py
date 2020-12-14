@@ -10,7 +10,7 @@ def home(request):
     latest_two_news = News.published.order_by('-publish')[:2]
     latest_news = News.published.order_by('-publish')[:6]
     sport_news = News.objects.all().filter(category__name__iexact='Deportes').order_by('-publish')[:6]
-    latest_articles = Article.objects.all().order_by('-publish')[:6]
+    latest_articles = Article.objects.all().filter(status='publicado').order_by('-publish')[:6]
     visitor_cookie_handler(request)
     context = {
                 'popular_news': popular_news,

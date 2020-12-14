@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
 from django.contrib.auth.models import User
 from news.models import News
 from .forms import UserEditForm, ProfileEditForm
@@ -9,6 +10,7 @@ from .forms import UserEditForm, ProfileEditForm
 
 @login_required()
 def dashboard(request):
+
     user_save_news = News.published.all().filter(user_save=request.user)
     context = {'user_save_news': user_save_news}
     return render(request, 'account/dashboard.html', context)

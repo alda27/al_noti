@@ -4,6 +4,8 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+from .forms import SearchForm
 from .models import News
 
 
@@ -52,3 +54,21 @@ def news_save(request):
         except:
             pass
     return JsonResponse({'status': 'ko'})
+
+
+def search_news(request):
+    form = SearchForm()
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            search_vector = SearchVector('title', 'body')
+            search_query = SearchQuery(query)
+            results = News.objects.annotate(
+                search=search_vector,
+                rank=SearchRank(search_vector, search_query)
+            ).filter(search=search_query).order_by('-rank')
+    context = {'form': form, 'query': query, 'results': results}
+    return render(request, 'news/search.html', context)

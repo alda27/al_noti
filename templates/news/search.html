@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    {% if query %}
+        <h2>Noticias que contienen "{{ query }}</h2>
+        <h3>{% with results.count as total_results %}
+            Encontrado{{ total_results|pluralize }} {{ total_results }} resultado{{ total_results|pluralize }}
+        {% endwith %}</h3>
+
+        {% for news in results %}
+            <h4>
+                <a href="{{ news.get_absolute_url }}">{{ news.title }}</a>
+                {{ news.body|truncatewords:5|safe }}
+            </h4>
+        {% empty %}
+            <p>no hay Noticias relacionadas con la busqueda</p>
+        {% endfor %}
+    {% else %}
+        <h1>Buscar Noticias</h1>
+        <form action="." method="get">
+            {{ form.as_p }}
+            <input type="submit" value="Buscar">
+        </form>
+    {% endif %}
+
+{% endblock %}

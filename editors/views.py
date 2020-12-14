@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Article
 from .forms import ArticleForm
 # Create your views here.
