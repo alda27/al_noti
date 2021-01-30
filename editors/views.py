@@ -15,6 +15,7 @@ def dashboard(request):
 
 def edit_article(request, user_id):
     article = get_object_or_404(Article, author=request.user, id=user_id)
+
     if request.method == 'POST':
         form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
@@ -24,7 +25,6 @@ def edit_article(request, user_id):
             form_modified.author = request.user
             if 'photo' in request.FILES:
                 form_modified.photo = request.FILES['photo']
-                form_modified.save()
             form_modified.save()
     else:
         form = ArticleForm(instance=article)

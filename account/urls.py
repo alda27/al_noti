@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+
 app_name = 'account'
 
 urlpatterns = [
@@ -10,5 +11,7 @@ urlpatterns = [
     path('dashboard/edit/', views.edit, name='edit_profile'),
     path('register', views.register_user, name='register'),
     path('logout', views.logout_user, name='logout'),
+    # path('remove/news/<int:id_news>', views.delete_user_news, name='remove-news'),
+
 
 ]
