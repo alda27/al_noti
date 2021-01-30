@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
 
 from django.contrib.auth.models import User
 from news.models import News
@@ -10,11 +11,18 @@ from .forms import UserEditForm, ProfileEditForm
 
 @login_required
 def dashboard(request):
-    user_save_news = News.published.all().filter(user_save=request.user)
+    user_save_news = News.published.all().filter(user_save=request.user).order_by('-date_user_save')
     context = {'user_save_news': user_save_news}
     return render(request, 'account/dashboard.html', context)
 
-#
+
+# def delete_user_news(request, id_news):
+#     new_delete = get_object_or_404(News, id_news)
+#     user = request.user
+#     new_delete.user_save.remove(user)
+#     new_delete.save()
+#     return redirect('account:dashboard')
+
 # @login_required
 # def remove_news(request, news_id):
 #     news = News.objects.get(id=news_id)
