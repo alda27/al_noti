@@ -25,6 +25,11 @@
                     <div class="container-news-date">
                         <span>{{ article_details.publish|date:"SHORT_DATE_FORMAT" }} | {{ article_details.publish|time:"g:i A" }}</span>
                     </div>
+                    {% if request.user == article_details.author %}
+                        <div class="container-save-news ">
+                            <a href="{% url 'editors:edit_article' article_details.id %}" class="btn btn-primary text-white">Editar</a>
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="container-paragraph-single-news m-2">
                     <h4 class="h4 mb-3 mt-2">{{ article_details.title }}</h4>
