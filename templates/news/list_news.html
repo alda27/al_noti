@@ -8,7 +8,12 @@
             {% for list_news in list_news %}
                 <div class="col-lg-4 mb-2 pl-1 pr-1">
                     <div class="container-img-list-news mb-2">
-                         <img src="{% if list_news.photo %}{{ list_news.photo.url }}{% endif %} " alt="" class="img-cover-list-news rounded mb-2">
+                         {% if list_news.photo %}
+                        {% load thumbnail %}
+                        {% thumbnail list_news.photo "500x500" as im %}
+                            <img src="{{ im.url }} " alt="{{ list_news.title }}" class="img-cover-list-news rounded mb-2">
+                        {% endthumbnail %}
+                    {% endif %}
                     </div>
 
                     <h6 class="h5 mb-1"><a class="link__news"

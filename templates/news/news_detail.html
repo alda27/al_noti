@@ -6,8 +6,13 @@
         <div class="row">
             <div class="col-lg-8 justify-content-center m-3">
                 <div class=" container-img-news-detail">
-                    <img src="{% if news_detail.photo %}{{ news_detail.photo.url }}{% endif %} " alt=""
-                         class="img-news-detail">
+                    {% if news_detail.photo %}
+                        {% load thumbnail %}
+                        {% thumbnail news_detail.photo "700" as im %}
+                            <img src="{{ im.url }} " alt="" class="img-news-detail">
+                        {% endthumbnail %}
+                    {% endif %}
+
                 </div>
                 <div class="container-meta-data m-2 d-flex justify-content-between align-items-center ">
                     <div class="container-post-single">
@@ -23,12 +28,13 @@
                     </div>
                     {% if user.is_authenticated %}
                         <div class="container-save-news ">
-                        {% with user_saves_news=news_detail.user_save.all %}
-                            <a class="btn {% if request.user in user_saves_news %}btn-danger{% else %}btn-success{% endif %}" id="save-btn" href="#" data-id="{{ news_detail.id }}"
-                               data-action="{% if request.user in user_saves_news %}un{% endif %}save">
-                                {% if request.user in user_saves_news %}Eliminar{% else %}Guardar{% endif %}</a>
-                        {% endwith %}
-                    </div>
+                            {% with user_saves_news=news_detail.user_save.all %}
+                                <a class="btn {% if request.user in user_saves_news %}btn-danger{% else %}btn-success{% endif %}"
+                                   id="save-btn" href="#" data-id="{{ news_detail.id }}"
+                                   data-action="{% if request.user in user_saves_news %}un{% endif %}save">
+                                    {% if request.user in user_saves_news %}Eliminar{% else %}Guardar{% endif %}</a>
+                            {% endwith %}
+                        </div>
                     {% endif %}
                 </div>
                 <div class="container-paragraph-single-news m-2">
@@ -67,33 +73,33 @@
 
 {% endblock %}
 {% block domready %}
-        $('#save-btn').click(function (e) {
-            e.preventDefault();
-            $.post('{% url "news:news_save" %}',
-                {
-                    id: $(this).data('id'),
-                    action: $(this).data('action')
-                },
-                function (data) {
-                    if (data['status'] == 'ok') {
-                        var previous_action = $('#save-btn').data('action');
-                        // toggle data-action
-                        $('#save-btn').data('action', previous_action == 'save' ? 'unsave' : 'save');
-                        // toggle link text
-                        $('#save-btn').text(previous_action == 'save' ? 'Eliminar' : 'Guardar');
+    $('#save-btn').click(function (e) {
+    e.preventDefault();
+    $.post('{% url "news:news_save" %}',
+    {
+    id: $(this).data('id'),
+    action: $(this).data('action')
+    },
+    function (data) {
+    if (data['status'] == 'ok') {
+    var previous_action = $('#save-btn').data('action');
+    // toggle data-action
+    $('#save-btn').data('action', previous_action == 'save' ? 'unsave' : 'save');
+    // toggle link text
+    $('#save-btn').text(previous_action == 'save' ? 'Eliminar' : 'Guardar');
 
-                        if (previous_action == 'save'){
-                            $('#save-btn').removeClass( 'btn-success');
-                            $('#save-btn').addClass( 'btn-danger');
+    if (previous_action == 'save'){
+    $('#save-btn').removeClass( 'btn-success');
+    $('#save-btn').addClass( 'btn-danger');
 
-                        }else{
-                            $('#save-btn').removeClass( 'btn-danger');
-                            $('#save-btn').addClass( 'btn-success');
-                        }
+    }else{
+    $('#save-btn').removeClass( 'btn-danger');
+    $('#save-btn').addClass( 'btn-success');
+    }
 
-                    }
-                }
-            );
-        });
+    }
+    }
+    );
+    });
 
 {% endblock %}

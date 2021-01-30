@@ -44,8 +44,10 @@ INSTALLED_APPS = [
     'ckeditor',
     # 'debug_toolbar', (debug tool bar app) doesnt work
     'crispy_forms',
+    'sorl.thumbnail',  # sorl-thumbnail app
 
 ]
+THUMBNAIL_DEBUG = True
 
 MIDDLEWARE = [
     #  'debug_toolbar.middleware.DebugToolbarMiddleware', (debug tool bar app) doesnt work
@@ -143,7 +145,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 LOGIN_URL = 'account:login'
-
 
 # crispy form app
 # CRISPY_TEMPLATE_PACK = 'boostrap4'
