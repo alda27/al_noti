@@ -64,27 +64,7 @@
                 </form>{% endcomment %}
                 <h3 class="h3 text-danger">Implementación del formulario de comentar pronto</h3>
             </div>
-            <div class="col-lg-8 mt-5">
-                <h5 class="h5 mb-5">{{ comments.count }} Comentario{{ comments.count|pluralize }}</h5>
-                <hr>
-                <div class="row">
-                    {% for comment in comments %}
-                        <div class="col-lg-12 d-flex justify-content-between mb-5">
-                            <div class="mr-3">
-                                <img src="{{ comment.author.profile.photo.url }}" alt="user coment">
 
-                            </div>
-                            <div>
-                                <p class="mb-2 text-muted text-justify font-italic">{{ comment.body }}</p>
-                                <div class="mt-1 d-flex justify-content-between ">
-                                    <span class="text-muted">{{ comment.author }}</span>
-                                    <span class="text-muted">{{ comment.created|date:"SHORT_DATE_FORMAT" }} | {{ comment.created|time:"g:i A" }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
         </div>
     </div>
 

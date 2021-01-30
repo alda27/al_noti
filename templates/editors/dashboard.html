@@ -4,7 +4,7 @@
     <ul>
         {% for article in articles %}
             <div class="col-lg-8 d-flex justify-content-between text-center">
-                <li><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></li><a class="btn btn-warning" href="{% url 'editors:edit_article' article.author article.id %}">Editar</a>
+                <li><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></li><a class="btn btn-warning" href="{% url 'editors:edit_article' article.id %}">Editar</a>
             </div>
         {% empty %}
             <h3>No hay articulos</h3>

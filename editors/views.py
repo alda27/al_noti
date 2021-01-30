@@ -5,13 +5,16 @@ from .forms import ArticleForm
 
 
 def dashboard(request):
-    articles = Article.objects.all().filter(author=request.user)
-    context = {'articles': articles}
-    return render(request, 'editors/dashboard.html', context)
+    if request.user.has_perm('blog.add_article'):
+        articles = Article.objects.all().filter(author=request.user)
+        context = {'articles': articles}
+        return render(request, 'editors/dashboard.html', context)
+    else:
+        return redirect('home:home')
 
 
-def edit_article(request, author, id):
-    article = get_object_or_404(Article, author=request.user, id=id)
+def edit_article(request, user_id):
+    article = get_object_or_404(Article, author=request.user, id=user_id)
     if request.method == 'POST':
         form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():

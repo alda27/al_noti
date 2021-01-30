@@ -8,15 +8,23 @@ from news.models import News
 from .forms import UserEditForm, ProfileEditForm
 
 
-@login_required()
+@login_required
 def dashboard(request):
-
     user_save_news = News.published.all().filter(user_save=request.user)
     context = {'user_save_news': user_save_news}
     return render(request, 'account/dashboard.html', context)
 
+#
+# @login_required
+# def remove_news(request, news_id):
+#     news = News.objects.get(id=news_id)
+#     if news:
+#         news.user_save.remove(request.user)
+#         return redirect('account:dashboard')
+#     return render('account/dashboard.html')
 
-@login_required()
+
+@login_required
 def edit(request):
     if request.method == 'POST':
         user_edit_form = UserEditForm(instance=request.user, data=request.POST)
@@ -84,6 +92,8 @@ def login_user(request):
             return redirect('home:home')
         else:
             messages.error(request, 'Las credenciales no son correctas. intentalo de nuevo')
+            if next_parameter:
+                return redirect(next_parameter)
             return redirect('account:login')
     return render(request, 'account/login.html')
 
