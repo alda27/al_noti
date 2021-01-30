@@ -18,7 +18,7 @@
                             <li class="list-group-item d-flex justify-content-between">
                                 <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
                                 <a href="{% url 'editors:edit_article' article.id %}"
-                                   class="btn btn-danger remove-news">Editar</a>
+                                   class="btn btn-primary remove-news">Editar</a>
                             </li>
                         {% empty %}
                             <h3>Aún no has creado articulos</h3>
