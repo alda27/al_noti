@@ -64,6 +64,7 @@ class News(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='borrador',
                               verbose_name='Estado de la Noticia')
     user_save = models.ManyToManyField(User, related_name='news_saved', blank=True)
+    date_user_save = models.DateTimeField(null=True, blank=True)
     objects = models.Manager()  # the default manager
     published = PublishedManager()  # Our custom manager
 
