@@ -1,15 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h3>dashboard del editor</h3>
-    <ul>
-        {% for article in articles %}
-            <div class="col-lg-8 d-flex justify-content-between text-center">
-                <li><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></li><a class="btn btn-warning" href="{% url 'editors:edit_article' article.id %}">Editar</a>
-            </div>
-        {% empty %}
-            <h3>No hay articulos</h3>
-        {% endfor %}
 
-    </ul>
+<div class="container">
+    <!--ALERTS-->
+    {% include 'partials/_alerts.html' %}
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center mt-3">
+                Bienvenido {{ request.user.first_name|capfirst }} {{ request.user.last_name|capfirst }}</h2>
+            <hr>
+            <h4 class="text-center mt-3">Estos son tus articulos</h4>
+            <hr>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-group">
+                        {% for article in articles %}
+                            <li class="list-group-item d-flex justify-content-between">
+                                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                                <a href="{% url 'editors:edit_article' article.id %}"
+                                   class="btn btn-danger remove-news">Editar</a>
+                            </li>
+                        {% empty %}
+                            <h3>Aún no has creado articulos</h3>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% comment %}<script>
+        /*ADD PRODUCT TO CART FUNCTION*/
+        function deleteNews() {
+            let url = '/account/dashboard/'
+            fetch(url)
+                .then((response) => {
+                    console.log(response)
+                })
+                .then((data) => {
+                    console.log(data)
+                })
+        }
+        window.addEventListener('load', listNews)
+    </script>{% endcomment %}
+
 
 {% endblock %}
