@@ -24,7 +24,7 @@
     <header class="header">
         <div class="container">
             <div class="row header-logo-area">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <div class="row">
                         <div class="col-lg-4">
                             <a href="{% url 'home:home' %}"><img src="{% static 'img/logo.png' %}" alt="logo news"
@@ -34,17 +34,13 @@
                 </div>
 
 
-                <div class="col-9">
+                <div class="col-10">
                     <div class="auth-container">
                         {% if request.user.is_authenticated %}
-                            {% if perms.blog.view_article %}
-                                <a href="{% url 'editors:dashboard' %}" class="nav-link text-primary"><i class="fas fa-newspaper"></i>Mis articulos</a>
-                            {% endif %}
-                            <a href="{% url 'account:dashboard' %}" class="nav-link text-primary"><i class="fas fa-save"></i>Noticias Guardadas</a>
-                            <a href="{% url 'account:edit_profile' %}" class="nav-link text-primary"><i class="fas fa-pen"></i>Editar Perfil ({{ request.user|capfirst }})</a>
+
                             <a href="{% url 'account:logout' %}" class="nav-link text-danger"><i class="fas fa-user"></i>Cerrar Sesión</a>
                         {% else %}
-                            <a href="{% url 'account:login' %}" class="btn btn-primary text-white"><i class="fas fa-user"></i>login / Registrarse</a>
+                            <a href="{% url 'account:login' %}" class="btn btn-primary text-white"><i class="fas fa-lock-open"></i>login / Registrarse</a>
                         {% endif %}
                     </div>
                 </div>
@@ -166,8 +162,6 @@
         {% endblock %}
     });
 </script>
-<script>
-
-</script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block  title %}Buscar{% endblock %}
+{% block  title %}Buscar Noticia{% endblock %}
 {% block content %}
 
 
@@ -9,8 +9,7 @@
                 <div class="col-8">
                     <h3 class="text-center mb-3">Noticias que contienen "{{ query }}"</h3>
                     <h4 class="text-center mb-4">{% with results.count as total_results %}
-                        Encontrado{{ total_results|pluralize }} {{ total_results }} resultado
-                        {{ total_results|pluralize }}
+                        Encontrado{{ total_results|pluralize }} {{ total_results }} resultado{{ total_results|pluralize }}
                     {% endwith %}</h4>
                     {% for news in results %}
                         <div class="col-lg-4 mb-2 pl-1 pr-1">
@@ -38,7 +37,7 @@
                     <form action="." method="get">
                         <div class="input-group col-12">
                             {{ form.query }}
-                            <button class="btn btn-outline-primary ml-1" type="submit">Buscar</button>
+                            <button class="btn btn-outline-primary ml-1" type="submit"><i class="fas fa-search"></i> Buscar</button>
                         </div>
                     </form>
                 </div>

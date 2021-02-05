@@ -27,7 +27,7 @@
                     </div>
                     {% if request.user == article_details.author %}
                         <div class="container-save-news ">
-                            <a href="{% url 'editors:edit_article' article_details.id %}" class="btn btn-primary text-white">Editar</a>
+                            <a href="{% url 'articles:article_edit' article_details.id %}" class="btn btn-primary text-white">Editar</a>
                         </div>
                     {% endif %}
                 </div>

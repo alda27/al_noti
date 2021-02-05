@@ -2,4 +2,5 @@ from django import forms
 
 
 class SearchForm(forms.Form):
-    query = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    query = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Buscar una '
+                                                                                                  'noticia...'}))

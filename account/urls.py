@@ -6,9 +6,9 @@ app_name = 'account'
 
 urlpatterns = [
     path('login', views.login_user, name='login'),
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('user/dashboard/save-news/', views.dashboard, name='dashboard'),
     # path('remove/<int:id>', views.remove_news, name='remove_news'),
-    path('dashboard/edit/', views.edit, name='edit_profile'),
+    path('user/dashboard/edit/profile/', views.edit_profile, name='edit_profile'),
     path('register', views.register_user, name='register'),
     path('logout', views.logout_user, name='logout'),
     # path('remove/news/<int:id_news>', views.delete_user_news, name='remove-news'),

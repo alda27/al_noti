@@ -1,8 +1,7 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
 
 from django.contrib.auth.models import User
 from news.models import News
@@ -33,7 +32,8 @@ def dashboard(request):
 
 
 @login_required
-def edit(request):
+def edit_profile(request):
+
     if request.method == 'POST':
         user_edit_form = UserEditForm(instance=request.user, data=request.POST)
         profile_edit_form = ProfileEditForm(instance=request.user.profile, data=request.POST, files=request.FILES)
@@ -53,56 +53,63 @@ def edit(request):
 
     context = {'user_form': user_edit_form,
                'profile_form': profile_edit_form}
-    return render(request, 'account/edit.html', context)
+    return render(request, 'account/edit_profile.html', context)
 
 
 # Create your views here.
 def register_user(request):
-    if request.method == 'POST':
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        username = request.POST['username']
-        email = request.POST['email']
-        password = request.POST['password']
-        password2 = request.POST['password2']
-        next_parameter = request.POST['next']
-        if password == password2:
-            if User.objects.filter(username=username).exists():
-                messages.error(request, 'El usuario ya existe')
-                redirect('account:register')
-            elif User.objects.filter(email=email).exists():
-                messages.error(request, 'El email ya existe')
-                redirect('account:register')
-            else:
-                user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username,
-                                                email=email, password=password)
-                user.save()
-                username = request.POST['username']
-                password = request.POST['password']
-                user = authenticate(username=username, password=password)
-                login(request, user)
-                if next_parameter:
-                    return redirect(next_parameter)
-                messages.success(request, 'Registro exitoso')
+    if request.user.is_authenticated:
+        return redirect('home:home')
+    else:
+        if request.method == 'POST':
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            username = request.POST['username']
+            email = request.POST['email']
+            password = request.POST['password']
+            password2 = request.POST['password2']
+            next_parameter = request.POST['next']
+            if password == password2:
+                if User.objects.filter(username=username).exists():
+                    messages.error(request, 'El usuario ya existe')
+                    redirect('account:register')
+                elif User.objects.filter(email=email).exists():
+                    messages.error(request, 'El email ya existe')
+                    redirect('account:register')
+                else:
+                    user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username,
+                                                    email=email, password=password)
+                    user.save()
+                    username = request.POST['username']
+                    password = request.POST['password']
+                    user = authenticate(username=username, password=password)
+                    login(request, user)
+                    if next_parameter:
+                        return redirect(next_parameter)
+                    messages.success(request, 'Registro exitoso')
+                    return redirect('home:home')
     return render(request, 'account/register.html')
 
 
 def login_user(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        next_parameter = request.POST['next']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            if next_parameter:
-                return redirect(next_parameter)
-            return redirect('home:home')
-        else:
-            messages.error(request, 'Las credenciales no son correctas. intentalo de nuevo')
-            if next_parameter:
-                return redirect(next_parameter)
-            return redirect('account:login')
+    if request.user.is_authenticated:
+        return redirect('home:home')
+    else:
+        if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+            next_parameter = request.POST['next']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                if next_parameter:
+                    return redirect(next_parameter)
+                return redirect('home:home')
+            else:
+                messages.error(request, 'Las credenciales no son correctas. inténtalo de nuevo')
+                if next_parameter:
+                    return redirect(next_parameter)
+                return redirect('account:login')
     return render(request, 'account/login.html')
 
 

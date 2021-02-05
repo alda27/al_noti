@@ -31,6 +31,9 @@ class ProfileEditForm(forms.ModelForm):
         # labels = {
         #     'photo': ('Foto de Perfil',)
         # }
+        widgets = {
+            'photo': forms.ClearableFileInput(attrs={'class': 'form-control-file'})
+        }
 
 
 #

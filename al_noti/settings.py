@@ -42,15 +42,15 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     'ckeditor',
-    # 'debug_toolbar', (debug tool bar app) doesnt work
+    #   'debug_toolbar',  # (debug tool bar app)
     'crispy_forms',
     'sorl.thumbnail',  # sorl-thumbnail app
 
 ]
-THUMBNAIL_DEBUG = True
+# THUMBNAIL_DEBUG = True
+
 
 MIDDLEWARE = [
-    #  'debug_toolbar.middleware.DebugToolbarMiddleware', (debug tool bar app) doesnt work
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -58,8 +58,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    #  'debug_toolbar.middleware.DebugToolbarMiddleware',  # (debug tool bar app)
 ]
+
 
 ROOT_URLCONF = 'al_noti.urls'
 
@@ -126,11 +127,7 @@ USE_L10N = True
 
 USE_TZ = False
 
-# Authentication Backend
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'account.authentication.EmailAuthBackend',  # logs in user with email
-]
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -148,3 +145,18 @@ LOGIN_URL = 'account:login'
 
 # crispy form app
 # CRISPY_TEMPLATE_PACK = 'boostrap4'
+
+# Authentication Backend
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',  # logs in user with email
+]
+# INTERNAL_IPS = ['127.0.0.1']  # dont forget add this if you want to use debug toolbar
+
+# ckeditor configs
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'width': '100%',
+    }
+}
