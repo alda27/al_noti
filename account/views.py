@@ -1,4 +1,6 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -8,14 +10,12 @@ from news.models import News
 from .forms import UserEditForm, ProfileEditForm
 
 
-@login_required
-def dashboard(request):
+class DashboardView(LoginRequiredMixin, TemplateView):
     """
     This is dashboard when user see : his saved news, the news he has made, the article he has made and a profile editor
-    :param request:
     :return: template dashboard
     """
-    return render(request, 'account/dashboard.html')
+    template_name = 'account/dashboard.html'
 
 
 @login_required
