@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from blog.models import Article
 from django.contrib.auth.models import User
 from news.models import News
 from .forms import UserEditForm, ProfileEditForm
@@ -10,9 +10,29 @@ from .forms import UserEditForm, ProfileEditForm
 
 @login_required
 def dashboard(request):
+    """
+    This is dashboard when user see : his saved news, the news he has made, the article he has made and a profile editor
+    :param request:
+    :return: template dashboard
+    """
+    return render(request, 'account/dashboard.html')
+
+
+@login_required
+def dashboard_news(request):
     user_save_news = News.published.all().filter(user_save=request.user).order_by('-date_user_save')
     context = {'user_save_news': user_save_news}
-    return render(request, 'account/dashboard.html', context)
+    return render(request, 'account/news_saved.html', context)
+
+
+@login_required
+def dashboard_article(request):
+    if request.user.has_perm('blog.add_article'):
+        articles = Article.objects.all().filter(author=request.user)
+        context = {'articles': articles}
+        return render(request, 'account/dashboard_articles.html', context)
+    else:
+        return redirect('home:home')
 
 
 # def delete_user_news(request, id_news):
@@ -33,7 +53,6 @@ def dashboard(request):
 
 @login_required
 def edit_profile(request):
-
     if request.method == 'POST':
         user_edit_form = UserEditForm(instance=request.user, data=request.POST)
         profile_edit_form = ProfileEditForm(instance=request.user.profile, data=request.POST, files=request.FILES)

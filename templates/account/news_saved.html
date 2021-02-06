@@ -6,27 +6,9 @@
          {% include 'partials/_alerts.html' %}
         <div class="row">
             <div class="col-12">
-                <h2 class="text-center mt-3">
-                    Bienvenido {{ request.user.first_name|capfirst }} {{ request.user.last_name|capfirst }}</h2>
+                <h2 class="text-center mt-3">Las noticias que guardaste</h2>
                 <hr>
-                <h4 class="text-center mt-3">¿Qué quieres hacer?</h4>
-                <hr>
-                <div class="row p-4">
-                    <div class="col-lg-3">
-                            <a href="{% url 'account:dashboard_articles' %}" class="btn btn-primary"><i class="fas fa-blog"></i> Mis Articulos</a>
-                    </div>
-                    <div class="col-lg-3">
-                            <a href="{% url 'account:dashboard' %}" class="btn btn-primary"><i class="fas fa-newspaper"></i> Mis Noticias</a>
-                    </div>
-                    <div class="col-lg-3">
-                            <a href="{% url 'account:dashboard_news' %}" class="btn btn-primary"><i class="fas fa-save"></i> Noticias Guardadas</a>
-                    </div>
-                    <div class="col-lg-3">
-                            <a href="{% url 'account:edit_profile' %}" class="btn btn-primary"><i class="fas fa-user-edit"></i> Editar Perfil ({{ request.user|capfirst }})</a>
-                    </div>
-
-                        {% comment %}<ul class="list-group">
-
+                        <ul class="list-group">
                             {% for news in user_save_news %}
                                 <li class="list-group-item d-flex justify-content-between">
                                     <a href="{{ news.get_absolute_url }}">{{ news.title }}</a>
@@ -35,10 +17,8 @@
                              {% empty %}
                                 <h3 class="text-center text-danger">Aún no tienes noticias guardadas :( </h3>
                             {% endfor %}
-                        </ul>{% endcomment %}
+                        </ul>
 
-
-                </div>
             </div>
         </div>
     </div>

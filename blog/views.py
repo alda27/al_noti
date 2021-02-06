@@ -61,7 +61,7 @@ def edit_article(request, article_id):
             if 'photo' in request.FILES:
                 form_modified.photo = request.FILES['photo']
             form_modified.save()
-            return redirect('editors:dashboard')
+            return redirect('account:dashboard_articles')
     else:
         form = ArticleForm(instance=article)
     context = {'article': article, 'form': form}
@@ -71,5 +71,5 @@ def edit_article(request, article_id):
 
 class DeleteArticleView(LoginRequiredMixin, DeleteView):
     model = Article
-    success_url = reverse_lazy('editors:dashboard')
+    success_url = reverse_lazy('account:dashboard_articles')
     template_name = 'blog/article_confirm_delete.html'
