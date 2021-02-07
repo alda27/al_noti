@@ -1,11 +1,14 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from datetime import datetime
 from django.db.models import Count
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+from django.views.generic import DeleteView
 
 from .forms import SearchForm, CreateNewForm
 from .models import News
@@ -94,3 +97,9 @@ def search_news(request):
             ).filter(search=search_query).order_by('-rank')
     context = {'form': form, 'query': query, 'results': results}
     return render(request, 'news/search.html', context)
+
+
+class DeleteNewsView(LoginRequiredMixin, DeleteView):
+    model = News
+    success_url = reverse_lazy('account:dashboard_news')
+    template_name = 'news/news_confirm_delete.html'
