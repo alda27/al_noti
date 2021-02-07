@@ -57,7 +57,7 @@ class News(models.Model):
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING,
                                  verbose_name='Categoria de la Noticia')  # TODO: add related name
     photo = models.ImageField(upload_to='news/%Y/%m/%d/')
-    is_popular = models.BooleanField(default=False)
+    is_popular = models.BooleanField(default=False, verbose_name="¿Es popular?")
     publish = models.DateTimeField(default=timezone.now, verbose_name='Fecha de Publicación')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de Creación')
     updated = models.DateTimeField(auto_now=True, verbose_name='Fecha de Actualización')
