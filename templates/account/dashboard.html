@@ -16,10 +16,10 @@
                             <a href="{% url 'account:dashboard_articles' %}" class="btn btn-primary"><i class="fas fa-blog"></i> Mis Articulos</a>
                     </div>
                     <div class="col-lg-3">
-                            <a href="{% url 'account:dashboard' %}" class="btn btn-primary"><i class="fas fa-newspaper"></i> Mis Noticias</a>
+                            <a href="{% url 'account:dashboard_news' %}" class="btn btn-primary"><i class="fas fa-newspaper"></i> Mis Noticias</a>
                     </div>
                     <div class="col-lg-3">
-                            <a href="{% url 'account:dashboard_news' %}" class="btn btn-primary"><i class="fas fa-save"></i> Noticias Guardadas</a>
+                            <a href="{% url 'account:dashboard_news_saved' %}" class="btn btn-primary"><i class="fas fa-save"></i> Noticias Guardadas</a>
                     </div>
                     <div class="col-lg-3">
                             <a href="{% url 'account:edit_profile' %}" class="btn btn-primary"><i class="fas fa-user-edit"></i> Editar Perfil ({{ request.user|capfirst }})</a>

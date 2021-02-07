@@ -19,3 +19,5 @@
 11. crear signal para crear perfil del usuario cuando se registre y agregarlo al grupo usuarios
 12. agregar permisos y grupos para los editores y los usuario normales (done)
 13. Mejorar links de categorias (el nombre debe aparecer en minuscula)
+14. hacer template 404 y 500
+15. mejorar las conveciones y el estilo usado en el codigo

@@ -19,10 +19,20 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
 
 @login_required
-def dashboard_news(request):
+def dashboard_news_saved(request):
     user_save_news = News.published.all().filter(user_save=request.user).order_by('-date_user_save')
     context = {'user_save_news': user_save_news}
     return render(request, 'account/news_saved.html', context)
+
+
+@login_required
+def dashboard_news(request):
+    if request.user.has_perm('news.add_news'):
+        news = News.objects.all().filter(author=request.user)
+        context = {'news': news}
+        return render(request, 'account/dashboard_news.html', context)
+    else:
+        return redirect('home:home')
 
 
 @login_required
