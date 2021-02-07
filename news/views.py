@@ -6,13 +6,14 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
-from .forms import SearchForm
+
+from .forms import SearchForm, CreateNewForm
 from .models import News
 
 
 def news_list(request, category, id):
     list_news = News.published.all().filter(category__name__iexact=category, category__id=id).order_by('-publish')
-    paginator = Paginator(list_news, 3)
+    paginator = Paginator(list_news, 9)
     page_number = request.GET.get('page')
     page_list_news = paginator.get_page(page_number)
     context = {
@@ -37,6 +38,24 @@ def news_detail(request, category, year, month, day, slug):
                'popular_news': popular_news,
                'similar_news': similar_news}
     return render(request, 'news/news_detail.html', context)
+
+
+def create_news(request):
+    if request.method == 'POST':
+        form = CreateNewForm(request.POST, request.FILES)
+        if form.is_valid():
+            news_form = form.save(commit=False)
+            news_form.author = request.user
+            news_form.slug = '-'.join(form.cleaned_data['title'].split()).lower()
+            if 'photo' in request.FILES:
+                news_form.photo = request.FILES['photo']
+            news_form.save()
+            form.save_m2m()
+            return redirect('account:dashboard')
+    else:
+        form = CreateNewForm()
+    context = {'form': form}
+    return render(request, 'news/create_news.html', context)
 
 
 @login_required
