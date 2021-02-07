@@ -7,7 +7,7 @@
                     {% csrf_token %}
                     <h5>¿Seguro quieres eliminar el articulo: <a href="#">{{ object }}</a>?</h5>
                     <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
-                    <a href="{% url 'editors:dashboard' %}" class="btn btn-secondary"><i class="fas fa-backward"></i> No, llévame atrás</a>
+                    <a href="{% url 'account:dashboard_articles' %}" class="btn btn-secondary"><i class="fas fa-backward"></i> No, llévame atrás</a>
                 </form>
             </div>
         </div>
