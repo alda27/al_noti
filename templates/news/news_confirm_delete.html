@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center d-flex">
+            <div class="col-8">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <h5>¿Seguro quieres eliminar la noticia: <a href="#">{{ object }}</a>?</h5>
+                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                    <a href="{% url 'account:dashboard_news' %}" class="btn btn-secondary"><i class="fas fa-backward"></i> No, llévame atrás</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
