@@ -8,7 +8,7 @@
         {% include 'partials/_alerts.html' %}
         <h2 class="text-center mt-3">Estos Son Tus Noticias</h2>
         <div class="text-center mt-3">
-            <a class="btn btn-primary text-white"><i class="fas fa-plus"></i> Crear Noticia</a>
+            <a href="{% url 'news:create_news' %}" class="btn btn-primary text-white"><i class="fas fa-plus"></i> Crear Noticia</a>
         </div>
         <hr>
         <div class="row">
@@ -18,7 +18,7 @@
                         <li class="list-group-item d-flex justify-content-between">
                             <a href="{{ news.get_absolute_url }}">{{ news.title }} <i class="fas"></i> </a>
                             <div class="container-links">
-                                <a href="{% url 'articles:article_edit' news.id %}"
+                                <a href="{% url 'news:edit_news' news.id %}"
                                    class="btn btn-warning remove-news"><i class="fas fa-pen"></i> Editar</a>
                                 <a href="{% url 'news:delete_news' news.id %}" class="btn btn-danger"><i
                                         class="fas fa-trash"></i> Eliminar</a>

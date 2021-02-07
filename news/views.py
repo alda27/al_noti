@@ -42,7 +42,7 @@ def news_detail(request, category, year, month, day, slug):
                'similar_news': similar_news}
     return render(request, 'news/news_detail.html', context)
 
-
+@login_required()
 def create_news(request):
     if request.method == 'POST':
         form = CreateNewForm(request.POST, request.FILES)
@@ -97,6 +97,29 @@ def search_news(request):
             ).filter(search=search_query).order_by('-rank')
     context = {'form': form, 'query': query, 'results': results}
     return render(request, 'news/search.html', context)
+
+
+@login_required()
+def edit_news(request, news_id):
+    news = get_object_or_404(News, author=request.user, id=news_id)
+
+    if request.method == 'POST':
+        form = CreateNewForm(request.POST, request.FILES, instance=news)
+        if form.is_valid():
+            form_modified = form.save(commit=False)
+            form_modified.slug = '-'.join(form.cleaned_data['title'].split()).lower()
+            # form_modified.tags = form.cleaned_data['tags']
+            # form_modified.author = request.user
+            if 'photo' in request.FILES:
+                form_modified.photo = request.FILES['photo']
+            form_modified.save()
+            form.save_m2m()
+            return redirect('account:dashboard_news')
+    else:
+        form = CreateNewForm(instance=news)
+    context = {'news': news, 'form': form}
+
+    return render(request, 'news/edit_news.html', context)
 
 
 class DeleteNewsView(LoginRequiredMixin, DeleteView):

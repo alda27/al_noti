@@ -13,7 +13,7 @@ class CommentForm(ModelForm):
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ('title', 'body', 'photo', 'tags', 'status')
+        fields = ('title', 'body', 'photo', 'tags', 'publish', 'status')
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),

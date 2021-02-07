@@ -24,3 +24,5 @@ class CreateNewForm(forms.ModelForm):
             'category': forms.Select(attrs={'class': 'form-control'}),
             'status': forms.RadioSelect()
         }
+
+

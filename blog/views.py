@@ -48,6 +48,25 @@ def article_detail(request, year, month, day, slug):
 
 
 @login_required()
+def create_article(request):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            news_form = form.save(commit=False)
+            news_form.author = request.user
+            news_form.slug = '-'.join(form.cleaned_data['title'].split()).lower()
+            if 'photo' in request.FILES:
+                news_form.photo = request.FILES['photo']
+            news_form.save()
+            form.save_m2m()
+            return redirect('account:dashboard_articles')
+    else:
+        form = ArticleForm()
+    context = {'form': form}
+    return render(request, 'blog/create_article.html', context)
+
+
+@login_required()
 def edit_article(request, article_id):
     article = get_object_or_404(Article, author=request.user, id=article_id)
 
