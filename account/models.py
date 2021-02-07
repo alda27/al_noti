@@ -8,7 +8,7 @@ class Profile(models.Model):
     photo = models.ImageField(upload_to='profiles/instructors/%Y/%m/%d/', blank=True, default='profile/testimonial1.png')
 
     def __str__(self):
-        return 'Profile for user {}'.format(self.user.username)
+        return 'Profile for user {}'.format(self.user)
 
     class Meta:
         verbose_name = 'Perfil'

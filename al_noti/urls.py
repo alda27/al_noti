@@ -17,14 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+
 # import debug_toolbar
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', include('home.urls')),
-                  path('noticia/', include('news.urls', namespace='news')),
                   path('', include('account.urls', namespace='account')),
+                  path('noticias/', include('news.urls', namespace='news')),
                   path('articulos/', include('blog.urls', namespace='articles')),
                   path('editors/', include('editors.urls', namespace='editors')),
                   # path('__debug__/', include(debug_toolbar.urls))
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
