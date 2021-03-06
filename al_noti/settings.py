@@ -11,11 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import environ
 
-env = environ.Env()
-# reading .env file
-environ.Env.read_env()
+from decouple import config
+
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -24,11 +22,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', default=False)
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
@@ -93,22 +93,22 @@ WSGI_APPLICATION = 'al_noti.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'USER': env('DATABASE_USER'),
-#         'NAME': env('DATABASE_NAME'),
-#         'PASSWORD': env('DATABASE_PASS'),
-#         'HOST': '',
-#     }
-# }
-import dj_database_url
-
 DATABASES = {
-    'default': dj_database_url.config(
-        default=env('DATABASE_URL')
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': config('DATABASE_USER'),
+        'NAME': config('DATABASE_NAME'),
+        'PASSWORD': config('DATABASE_PASS'),
+        'HOST': '',
+    }
 }
+# import dj_database_url
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=env('DATABASE_URL')
+#     )
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
