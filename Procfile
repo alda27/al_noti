@@ -1,0 +1,1 @@
+web: gunicorn al_noti.wsgi --log-file -
