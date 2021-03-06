@@ -65,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #  'debug_toolbar.middleware.DebugToolbarMiddleware',  # (debug tool bar app)
+    'whitenoise.middleware.WhiteNoiseMiddleware' # for serving static files in production
 ]
 
 
@@ -92,14 +93,21 @@ WSGI_APPLICATION = 'al_noti.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'USER': env('DATABASE_USER'),
+#         'NAME': env('DATABASE_NAME'),
+#         'PASSWORD': env('DATABASE_PASS'),
+#         'HOST': '',
+#     }
+# }
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': env('DATABASE_USER'),
-        'NAME': env('DATABASE_NAME'),
-        'PASSWORD': env('DATABASE_PASS'),
-        'HOST': '',
-    }
+    'default': dj_database_url.config(
+        default=env('DATABASE_URL')
+    )
 }
 
 # Password validation
@@ -166,3 +174,6 @@ CKEDITOR_CONFIGS = {
         'width': '100%',
     }
 }
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # for static files production
+
