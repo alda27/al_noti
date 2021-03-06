@@ -29,4 +29,4 @@ urlpatterns = [
                   path('articulos/', include('blog.urls', namespace='articles')),
                   path('editors/', include('editors.urls', namespace='editors')),
                   # path('__debug__/', include(debug_toolbar.urls))
-              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
